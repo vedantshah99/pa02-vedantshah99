@@ -51,7 +51,7 @@ int main(int argc, char** argv){
         
         for(int i = 0; i < movies.size(); i++)
         {
-            cout << movies[i].getTitle() << ", "<< std::fixed << std::setprecision(3) << movies[i].getRating() << endl;
+            cout << movies[i].getTitle() << ", "<< std::fixed << std::setprecision(1) << movies[i].getRating() << endl;
         }
 
         return 0;
@@ -96,7 +96,7 @@ int main(int argc, char** argv){
             bests.push_back(prefixMovies[highest]);
             best = false;
         }
-        cout << prefixMovies[highest].getTitle() << ", "<< prefixMovies[highest].getRating() << endl;
+        cout << prefixMovies[highest].getTitle() << ", "<< std::fixed << std::setprecision(1)<< prefixMovies[highest].getRating() << endl;
         prefixMovies.erase(prefixMovies.begin()+ highest);
     }
     if(none){
