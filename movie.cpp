@@ -15,12 +15,22 @@ Movie::Movie(string mTitle, double mRating){
 }
 
 bool Movie::operator<(const Movie& m){
+    if(title < m.title){
+        return true;
+    }
+    return false;
 }
 
 bool Movie::operator>(const Movie& m){
-
+    if(title > m.title){
+        return true;
+    }
+    return false;
 }
 
 bool Movie::operator==(const Movie& m){
-
+    if(title == m.title){
+        return true;
+    }
+    return false;
 }

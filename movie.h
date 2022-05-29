@@ -2,7 +2,6 @@
 #include <string>
 using namespace std;
 
-#indef MOVIES_H
 #define MOVIES_H
 
 class Movie{
@@ -18,8 +17,5 @@ class Movie{
 
     private:
         string title;
-        double rating
-}
-
-
-#endif
+        double rating;
+};

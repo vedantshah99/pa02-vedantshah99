@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <set>
 #include <queue>
+#include "movie.h"
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
@@ -31,116 +32,106 @@ int main(int argc, char** argv){
     }
   
   // Create an object of a STL data-structure to store all the movies
-  vector<string> nameList;
-  vector<double> ratingList;
-  vector<string> lineList;
+  vector<Movie> movies;
 
   string line, movieName;
   double movieRating;
   // Read each file and store the name and rating
   while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
-        ratingList.push_back(movieRating);
-        nameList.push_back(movieName);
-        lineList.push_back(line);
+        Movie temp = Movie(movieName, movieRating);
+        movies.push_back(temp);
   }
-
+  
   movieFile.close();
+  
+  sort(movies.begin(), movies.end());
 
   if (argc == 2){
         //print all the movies in ascending alphabetical order of movie names
-        vector<string> printList;
-        vector<string> tempList = lineList;
-        while(printList.size() < lineList.size())
+        
+        for(int i = 0; i < movies.size(); i++)
         {
-            string first = tempList[0];
-            int removeNum =0;
-            for(int i = 1 ; i < tempList.size(); i++){
-                if(tempList[i] < first){
-                    first = tempList[i];
-                    removeNum = i;
-                }
-            }
-            printList.push_back(first);
-            tempList.erase(tempList.begin()+ removeNum);
-            cout << first << endl;
+            cout << movies[i].getTitle() << endl;
         }
 
         return 0;
+        
   }
 
   //  For each prefix,
   //  Find all movies that have that prefix and store them in an appropriate data structure
   //  If no movie with that prefix exists print the following message
-  vector<string> bests;
-  vector<double> bestsRatings;
+  
+  vector<Movie> bests;
+
   for(int j = 2; j < argc; j++){
-    vector<string> prefixList;
-    vector<double> prefixRatingList;
+    vector<Movie> prefixMovies;
     bool none = true;
     string prefix = argv[j];
 
-    for(int i = 0; i < lineList.size(); i++){
+    for(int i = 0; i < movies.size(); i++){
         //cout << lineList[i].substr(0,prefix.length()) << " - " << prefix << endl;
-        if(lineList[i].substr(0,prefix.length()) == prefix){
-            prefixList.push_back(lineList[i]);
-            prefixRatingList.push_back(ratingList[i]);
-            //cout << lineList[i] << endl;
+        if(movies[i].getTitle().substr(0,prefix.length()) == prefix){
+            prefixMovies.push_back(movies[i]);
             none = false;
         }
     }
-    cout << endl<< "In order of rating: " << endl;
-    //printing the list in order of rating
-    vector<string> tempList = prefixList;
-    vector<double> tempRatingList = prefixRatingList;
-    bool best = true;
+    if(!none){
+        cout << endl<< "In order of rating: " << endl;
+    }
 
-    for(int k =0; k < prefixRatingList.size(); k++)
-    {
-        int highest = 0;
-        for(int i = 1 ; i < tempRatingList.size(); i++){
-            //cout << tempList[i]<< "____" << tempRatingList[i] << ">" << tempRatingList[highest]<< endl;
-            if(tempRatingList[i] == tempRatingList[highest] && tempList[i] < tempList[highest]){
+    //printing the list in order of rating
+    bool best = true;
+    int size = prefixMovies.size();
+
+    for(int k =0; k < size; k++){
+        //Movie highest = movies[0];
+        int highest =0;
+        for(int i = 1 ; i < prefixMovies.size(); i++){
+            if(prefixMovies[i].getRating() == prefixMovies[highest].getRating() && prefixMovies[i].getTitle() < prefixMovies[highest].getTitle()){
                 highest = i;
             }
-            if(tempRatingList[i] > tempRatingList[highest]){
+            if(prefixMovies[i].getRating() > prefixMovies[highest].getRating()){
                 highest = i;
-                //cout << "--temp highest: " << tempList[highest] << endl;
-            } 
+            }
         }
-        if(best){
-            bests.push_back(tempList[highest]);
-            bestsRatings.push_back(tempRatingList[highest]);
+        if(best && !none){
+            bests.push_back(prefixMovies[highest]);
             best = false;
         }
-        cout << tempList[highest] << endl;
-        tempList.erase(tempList.begin()+ highest);
-        tempRatingList.erase(tempRatingList.begin()+ highest);
+        cout << prefixMovies[highest].getTitle() << ", "<< prefixMovies[highest].getRating() << endl;
+        prefixMovies.erase(prefixMovies.begin()+ highest);
     }
-    if(none) cout << "No movies found with prefix "<< prefix << endl << endl;
+    if(none){
+        cout << "No movies found with prefix "<< prefix << endl;
+        bests.push_back(Movie("",0));
+    }
     cout << endl;
   }
 
   //  For each prefix,
   //  Print the highest rated movie with that prefix if it exists.
+  
   int i = 0;
   for(int j = 2; j < argc; j++){
-    cout << "Best movie with prefix " << argv[j] << " is: " << bests[i].substr(0,bests[i].length()-4) << " with rating " << std::fixed << std::setprecision(1) << bestsRatings[i] << endl;
-    i++;
+    if(bests[i].getTitle() == ""){
+    }
+    else{
+        cout << "Best movie with prefix " << argv[j] << " is: " << bests[i].getTitle() << " with rating " << std::fixed << std::setprecision(1) << bests[i].getRating() << endl;
+        i++;
+    } 
   }
 
   return 0;
 }
 
 /*
-The runtime analyis of my program would be 
+The runtime analyis of my program would be O(m(n+(k^2))). This can be explained since we start by iterating through all the prefixes. 
+While doing so, we iterate through all the movies to see which should be added to the prefixMovies list. We then also iterate through
+the prefixMovies through a nested for-loop.
 
 The runtime for the alphabetical sort in part (a) would be O(n^2) 
-since we are interating thorough each element of the list while iterating through the list
-
-The runtime for figuring out with values of the next correspond to the prefix is O(m*n) and the
-runtime for sorting them in order of rating is O(m*(k^2)). Therefore the total runtime for part b
-would be O(m*(n+k^2))
-
+since we are interating thorough each element of the list while iterating through the list1
 */
 
 bool parseLine(string &line, string &movieName, double &movieRating) {
