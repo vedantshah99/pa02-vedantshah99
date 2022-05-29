@@ -51,7 +51,7 @@ int main(int argc, char** argv){
         
         for(int i = 0; i < movies.size(); i++)
         {
-            cout << movies[i].getTitle() << endl;
+            cout << movies[i].getTitle() << ", "<< std::fixed << std::setprecision(3) << movies[i].getRating() << endl;
         }
 
         return 0;
@@ -75,9 +75,6 @@ int main(int argc, char** argv){
             prefixMovies.push_back(movies[i]);
             none = false;
         }
-    }
-    if(!none){
-        cout << endl<< "In order of rating: " << endl;
     }
 
     //printing the list in order of rating
