@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <set>
 #include <queue>
-#include "movie.h"
+#include "movies.h"
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
