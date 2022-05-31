@@ -80,16 +80,18 @@ int main(int argc, char** argv){
     //sorting list by rating
     sort(prefixMovies.begin(), prefixMovies.end(),compare_rating);
 
-    bool best = true;
-    bests.push_back(prefixMovies[0]);
-
-    for(int k =0; k < prefixMovies.size(); k++){
-        //Movie highest = movies[0];
-        cout << prefixMovies[k].getTitle() << ", "<< std::fixed << std::setprecision(1)<< prefixMovies[k].getRating() << endl;
-    }
     if(none){
         cout << "No movies found with prefix "<< prefix << endl;
         bests.push_back(Movie("",0));
+    }
+    else{
+        bool best = true;
+        bests.push_back(prefixMovies[0]);
+
+        for(int k =0; k < prefixMovies.size(); k++){
+            //Movie highest = movies[0];
+            cout << prefixMovies[k].getTitle() << ", "<< std::fixed << std::setprecision(1)<< prefixMovies[k].getRating() << endl;
+        }
     }
     cout << endl;
   }
