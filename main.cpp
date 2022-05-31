@@ -77,27 +77,15 @@ int main(int argc, char** argv){
         }
     }
 
-    //printing the list in order of rating
-    bool best = true;
-    int size = prefixMovies.size();
+    //sorting list by rating
+    sort(prefixMovies.begin(), prefixMovies.end(),compare_rating);
 
-    for(int k =0; k < size; k++){
+    bool best = true;
+    bests.push_back(prefixMovies[0]);
+
+    for(int k =0; k < prefixMovies.size(); k++){
         //Movie highest = movies[0];
-        int highest =0;
-        for(int i = 1 ; i < prefixMovies.size(); i++){
-            if(prefixMovies[i].getRating() == prefixMovies[highest].getRating() && prefixMovies[i].getTitle() < prefixMovies[highest].getTitle()){
-                highest = i;
-            }
-            if(prefixMovies[i].getRating() > prefixMovies[highest].getRating()){
-                highest = i;
-            }
-        }
-        if(best && !none){
-            bests.push_back(prefixMovies[highest]);
-            best = false;
-        }
-        cout << prefixMovies[highest].getTitle() << ", "<< std::fixed << std::setprecision(1)<< prefixMovies[highest].getRating() << endl;
-        prefixMovies.erase(prefixMovies.begin()+ highest);
+        cout << prefixMovies[k].getTitle() << ", "<< std::fixed << std::setprecision(1)<< prefixMovies[k].getRating() << endl;
     }
     if(none){
         cout << "No movies found with prefix "<< prefix << endl;
@@ -123,12 +111,15 @@ int main(int argc, char** argv){
 }
 
 /*
-The runtime analyis of my program would be O(m(n+(k^2))). This can be explained since we start by iterating through all the prefixes. 
-While doing so, we iterate through all the movies to see which should be added to the prefixMovies list. We then also iterate through
-the prefixMovies through a nested for-loop.
+The runtime analyis of my program would be O(m(n + k*log k + k))). This can be explained since we start 
+by iterating through all the prefixes which has m elements
+    -While doing so, we iterate through all the movies(n elements) to see which should be added to the 
+    prefixMovies list. 
+    -We then also iterate through the prefixMovies(k elements) through a sort function which has a time complexity 
+    of k log k
+    -And finally, we iterate through the sorted prefixMovies vector and print them all
 
-The runtime for the alphabetical sort in part (a) would be O(n^2) 
-since we are interating thorough each element of the list while iterating through the list1
+
 */
 
 bool parseLine(string &line, string &movieName, double &movieRating) {

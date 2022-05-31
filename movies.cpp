@@ -34,3 +34,16 @@ bool Movie::operator==(const Movie& m){
     }
     return false;
 }
+
+bool compare_rating(Movie m1, Movie m2){
+    if(m1.getRating() < m2.getRating()){
+        return false;
+    }
+    if(m1.getRating() > m2.getRating()){
+        return true;
+    }
+    if(m1.getRating() == m2.getRating()){
+        return (m1.getTitle() < m2.getTitle());
+    }
+    return true;
+}

@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/cs/student/vedantshah/cs24/pa02-vedantshah99'
+g++    -c -o movies.o movies.cpp
+g++ -std=c++11 main.cpp movies.o -o runMovies
+make: Leaving directory '/cs/student/vedantshah/cs24/pa02-vedantshah99'
+ 

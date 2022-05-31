@@ -19,3 +19,5 @@ class Movie{
         string title;
         double rating;
 };
+
+bool compare_rating(Movie m1, Movie m2);
