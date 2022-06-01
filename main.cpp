@@ -1,6 +1,6 @@
 // Spring'22
 // Instructor: Diba Mirza
-// Student name: 
+// Student name: Vedant Shah
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,7 +13,7 @@
 #include <set>
 #include <queue>
 #include "movies.h"
-using namespace std;
+using namespace std; 
 
 bool parseLine(string &line, string &movieName, double &movieRating);
 
@@ -123,7 +123,6 @@ The storage analysis of my program would be O(n+k+2m)
     - I also stored all the movies with a certain prefix into a vector of Movies during the second part of the program, which has a storage of O(k)
     - Finally, I store all the entered prefixes into a vector of strings, which has a storage of O(m)
     -All together, the program has a total storage of O(n+k+2m)
-
 
 */
 

@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Tue May 31 21:04:37 2022
+# Make data base, printed on Tue May 31 21:56:28 2022
 
 # Variables
 
@@ -215,7 +216,7 @@ LMOD_VERSION = 8.4.23
 # environment
 SSH_CONNECTION = 128.111.27.247 39374 128.111.30.212 2022
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=5/127=4%
+# Load=97/1024=9%, Rehash=0, Collisions=5/130=4%
 
 # Pattern-specific Variable Values
 
@@ -236,7 +237,7 @@ SSH_CONNECTION = 128.111.27.247 39374 128.111.30.212 2022
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 03:14:45.631294522
+#  Last modified 2022-05-31 21:56:03.997895094
 #  File has been updated.
 #  Successfully updated.
 
@@ -258,12 +259,14 @@ all: runMovies
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 # Not a target:
 main.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 09:50:32.178114235
+#  Last modified 2022-05-31 21:55:42.04399021
 #  File has been updated.
 #  Successfully updated.
 
@@ -276,14 +279,40 @@ movies.o:
 
 runMovies: main.cpp movies.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 09:50:35.071969609
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-05-31 21:22:45.925496961
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := runMovies
+# automatic
+# * := 
+# automatic
+# < := main.cpp
+# automatic
+ 
+# + := main.cpp movies.o
+# automatic
+# % := 
+# automatic
+# ^ := main.cpp movies.o
+# automatic
+# ? := main.cpp
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
 #  recipe to execute (from 'Makefile', line 4):
 	g++ -std=c++11 main.cpp movies.o -o runMovies
 
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, Collisions=0/23=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/24=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -293,9 +322,9 @@ runMovies: main.cpp movies.o
 # strcache buffers: 1 (0) / strings = 23 / storage = 273 B / avg = 11 B
 # current buf: size = 8162 B / used = 273 B / count = 23 / avg = 11 B
 
-# strcache performance: lookups = 35 / hit rate = 34%
+# strcache performance: lookups = 36 / hit rate = 36%
 # hash-table stats:
-# Load=23/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Tue May 31 21:04:37 2022
+# Load=23/8192=0%, Rehash=0, Collisions=0/36=0%
+# Finished Make data base on Tue May 31 21:56:28 2022
 
  

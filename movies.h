@@ -1,7 +1,6 @@
 #include <vector>
 #include <string>
 using namespace std;
-
 #define MOVIES_H
 
 class Movie{
