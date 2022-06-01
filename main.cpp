@@ -112,19 +112,15 @@ int main(int argc, char** argv){
 /*
 The runtime analyis of my program would be O(m(n + k*log k + k))). This can be explained since we start 
 by iterating through all the prefixes which has m elements
-    -While doing so, we iterate through all the movies(n elements) to see which should be added to the 
-    prefixMovies list. 
-    -We then also iterate through the prefixMovies(k elements) through a sort function which has a time complexity 
-    of k log k
+    -While doing so, we iterate through all the movies(n elements) to see which should be added to the prefixMovies list. 
+    -We then also iterate through the prefixMovies(k elements) through a sort function which has a time complexity of k log k
     -And finally, we iterate through the sorted prefixMovies vector and print them all
 
 
 The storage analysis of my program would be O(n+k+2m)
-    - First, I saved the titles/ratings of all the movies into a vector of Movies, which requires a storage 
-    of O(n).
+    - First, I saved the titles/ratings of all the movies into a vector of Movies, which requires a storage of O(n).
     - I stored the best Movies of each prefix into a vector of Movies, which has a storage of O(m)
-    - I also stored all the movies with a certain prefix into a vector of Movies during the second part of 
-    the program, which has a storage of O(k)
+    - I also stored all the movies with a certain prefix into a vector of Movies during the second part of the program, which has a storage of O(k)
     - Finally, I store all the entered prefixes into a vector of strings, which has a storage of O(m)
     -All together, the program has a total storage of O(n+k+2m)
 
